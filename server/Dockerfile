@@ -1,5 +1,7 @@
 FROM node:lts-alpine
 
+RUN apk upgrade --no-cache zlib
+
 WORKDIR /app
 
 COPY package*.json ./
