@@ -20,6 +20,16 @@ pipeline {
                 git branch: 'main',
                     url: 'git@github.com:bahaeddine-krifa/mern-app-devops.git',
                     credentialsId: 'github_ssh'
+                sh '''
+                    echo "=== Jenkins execution identity ==="
+                    id
+
+                    echo "=== Docker socket permissions ==="
+                    ls -ln /var/run/docker.sock
+
+                    echo "=== Docker connectivity ==="
+                    docker version
+                '''
             }
         }
 
