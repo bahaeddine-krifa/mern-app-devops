@@ -1,2 +1,13 @@
-node_modules
-.vscode
+# Dependencies
+node_modules/
+
+# IDE
+.vscode/
+
+# Environment variables and secrets
+**/.env
+**/.env.*
+!**/.env.example
+
+# Trivy reports
+trivy_*.txt

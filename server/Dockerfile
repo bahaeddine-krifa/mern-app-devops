@@ -1,6 +1,7 @@
 FROM node:lts-alpine
 
-RUN apk upgrade --no-cache zlib
+RUN apk upgrade --no-cache zlib \
+    && npm install -g npm@12.2.2
 
 WORKDIR /app
 
