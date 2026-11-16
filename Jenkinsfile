@@ -28,7 +28,7 @@ pipeline {
                 anyOf {
                     changeset 'server/**'
                     changeset 'Jenkinsfile'
-                    expression { env.BUILD_NUMBER == '1' }
+                    expression { env.BUILD_NUMBER == '3' }
                 }
             }
 
@@ -66,7 +66,7 @@ pipeline {
                 anyOf {
                     changeset 'client/**'
                     changeset 'Jenkinsfile'
-                    expression { env.BUILD_NUMBER == '1' }
+                    expression { env.BUILD_NUMBER == '3' }
                 }
             }
 
