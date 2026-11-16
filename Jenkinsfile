@@ -20,16 +20,6 @@ pipeline {
                 git branch: 'main',
                     url: 'git@github.com:bahaeddine-krifa/mern-app-devops.git',
                     credentialsId: 'github_ssh'
-                sh '''
-                    echo "=== Jenkins execution identity ==="
-                    id
-
-                    echo "=== Docker socket permissions ==="
-                    ls -ln /var/run/docker.sock
-
-                    echo "=== Docker connectivity ==="
-                    docker version
-                '''
             }
         }
 
@@ -38,7 +28,6 @@ pipeline {
                 anyOf {
                     changeset 'server/**'
                     changeset 'Jenkinsfile'
-                    expression { env.BUILD_NUMBER == '6' }
                 }
             }
 
@@ -57,6 +46,8 @@ pipeline {
                         docker run --rm \
                             -v /var/run/docker.sock:/var/run/docker.sock \
                             aquasec/trivy:0.76.2 image \
+                            --severity HIGH,CRITICAL \
+                            --exit-code 1 \
                             "$IMAGE_SERVER:$BUILD_NUMBER" \
                             > trivy_server.txt
 
@@ -76,7 +67,6 @@ pipeline {
                 anyOf {
                     changeset 'client/**'
                     changeset 'Jenkinsfile'
-                    expression { env.BUILD_NUMBER == '6' }
                 }
             }
 
@@ -95,6 +85,8 @@ pipeline {
                         docker run --rm \
                             -v /var/run/docker.sock:/var/run/docker.sock \
                             aquasec/trivy:0.76.2 image \
+                            --severity HIGH,CRITICAL \
+                            --exit-code 1 \
                             "$IMAGE_CLIENT:$BUILD_NUMBER" \
                             > trivy_client.txt
 
